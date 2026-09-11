@@ -1,0 +1,22 @@
+.service-card {
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  height: 100%;
+}
+
+.service-card__title {
+  font-size: 19px;
+  color: var(--color-text);
+}
+
+.service-card__desc {
+  color: var(--color-text-muted);
+  font-size: 14.5px;
+  flex-grow: 1;
+}
+
+.service-card__action {
+  margin-top: 6px;
+}

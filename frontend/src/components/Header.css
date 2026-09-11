@@ -1,0 +1,140 @@
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(11, 18, 32, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.site-header--scrolled {
+  border-bottom-color: var(--color-border);
+  background: rgba(11, 18, 32, 0.97);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.site-header__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.site-header__brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  min-width: 0;
+}
+
+.site-header__name {
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.site-header__tagline {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.site-header__nav--desktop {
+  display: none;
+  gap: 28px;
+}
+
+.site-header__nav-link {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  transition: color 0.15s ease;
+}
+
+.site-header__nav-link:hover {
+  color: var(--color-accent);
+}
+
+.site-header__right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.site-header__proprietor {
+  display: none;
+  flex-direction: column;
+  text-align: right;
+  line-height: 1.2;
+}
+
+.site-header__proprietor-name {
+  font-weight: 700;
+  font-size: 13.5px;
+}
+
+.site-header__proprietor-role {
+  font-size: 11.5px;
+  color: var(--color-text-dim);
+}
+
+.site-header__call {
+  padding: 10px 16px;
+}
+
+.site-header__menu-toggle {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.site-header__nav--mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 20px 20px;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-bg-alt);
+}
+
+.site-header__nav--mobile a:not(.btn) {
+  padding: 12px 8px;
+  font-weight: 600;
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.site-header__nav--mobile .btn {
+  margin-top: 12px;
+}
+
+@media (min-width: 900px) {
+  .site-header__nav--desktop {
+    display: flex;
+  }
+
+  .site-header__proprietor {
+    display: flex;
+  }
+
+  .site-header__menu-toggle {
+    display: none;
+  }
+}
