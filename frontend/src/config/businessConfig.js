@@ -15,7 +15,7 @@
 const businessConfig = {
   // ---------------- Identity ----------------
   BUSINESS_NAME: 'Subramani Enterprises',
-  PROPRIETOR_NAME: 'Subramani R',
+  PROPRIETOR_NAME: 'Subramaniyan',
   TAGLINE: 'Driving Services',
 
   // ---------------- Contact (REPLACE THESE) ----------------
@@ -44,7 +44,7 @@ const businessConfig = {
   // Do NOT use localhost / 127.0.0.1 / a local IP address here.
   // Can be overridden by the VITE_PUBLIC_WEBSITE_URL environment variable.
   PUBLIC_WEBSITE_URL:
-    import.meta.env.VITE_PUBLIC_WEBSITE_URL || 'https://YOUR-DEPLOYED-DOMAIN.com',
+    import.meta.env.VITE_PUBLIC_WEBSITE_URL || 'https://akax-web.github.io/sme-enterprises/',
 
   // ---------------- Backend API ----------------
   // Base URL of the deployed Spring Boot backend.
@@ -56,7 +56,11 @@ const businessConfig = {
   UDYAM_NUMBER: 'UDYAM-TN-02-0194936',
   UDYAM_ENTERPRISE_TYPE: 'Micro',
   UDYAM_MAJOR_ACTIVITY: 'Services',
-  CERTIFICATE_IMAGE_PATH: '/assets/udyam-certificate.jpg',
+  // The certificate lives in public/assets/. During local dev Vite serves
+  // public/ at /, so the path is /assets/... In production the Vite base is
+  // /sme-enterprises/, so Vite automatically prefixes public/ assets with it.
+  // Using import.meta.env.BASE_URL gives us the correct prefix in both cases.
+  CERTIFICATE_IMAGE_PATH: `${import.meta.env.BASE_URL}assets/udyam-certificate.jpg`,
 };
 
 // ---------------- Derived helper links ----------------
