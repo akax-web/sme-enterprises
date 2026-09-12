@@ -13,12 +13,11 @@ import react from '@vitejs/plugin-react';
 // The VITE_BASE_PATH environment variable lets CI override the base.
 // The GitHub Actions workflow does NOT set VITE_BASE_PATH, so it defaults
 // to '/sme-enterprises/' in build mode.
-export default defineConfig(({ command }) => ({
+export default defineConfig({
   plugins: [react()],
-  // Use '/sme-enterprises/' for production builds (GitHub Pages sub-path).
-  // Use '/' for local development.
-  base: command === 'build' ? '/sme-enterprises/' : '/',
+  // Use '/' for Netlify deployment (root domain).
+  base: '/',
   server: {
     port: 5173,
   },
-}));
+});
