@@ -36,7 +36,7 @@ const STATIC_PACKAGES = [
   {
     id: 'outstation',
     category: 'OUTSTATION TRIP',
-    sub: 'Per Day / One Way',
+    sub: 'Per Day',
     price: '₹1,800 + Food',
   },
 ];

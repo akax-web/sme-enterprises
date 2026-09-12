@@ -15,7 +15,7 @@
 const businessConfig = {
   // ---------------- Identity ----------------
   BUSINESS_NAME: 'Subramani Enterprises',
-  PROPRIETOR_NAME: 'Subramaniyan R',
+  PROPRIETOR_NAME: 'Subramani R',
   TAGLINE: 'Driving Services',
 
   // ---------------- Contact (REPLACE THESE) ----------------
