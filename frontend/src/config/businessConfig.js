@@ -44,10 +44,9 @@ const businessConfig = {
   // Do NOT use localhost / 127.0.0.1 / a local IP address here.
   // Can be overridden by the VITE_PUBLIC_WEBSITE_URL environment variable.
   // Set VITE_PUBLIC_WEBSITE_URL in your Netlify environment variables
-  // to the final deployed URL (e.g. https://subramani-enterprises.netlify.app/).
-  // Do NOT hard-code a placeholder URL here — leave it to the env variable.
+  // to override this value. Defaults to the live Netlify URL.
   PUBLIC_WEBSITE_URL:
-    import.meta.env.VITE_PUBLIC_WEBSITE_URL || '',
+    import.meta.env.VITE_PUBLIC_WEBSITE_URL || 'https://sme-enterprises.netlify.app/',
 
   // ---------------- Backend API ----------------
   // Base URL of the deployed Spring Boot backend.
