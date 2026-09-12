@@ -10,6 +10,12 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
+# Top-level permissions required by the workflow.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build:
     name: Build React frontend
@@ -35,19 +41,19 @@ jobs:
           VITE_PUBLIC_WEBSITE_URL: https://akax-web.github.io/sme-enterprises/
         run: npm run build
 
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Must point at the build output inside the frontend sub-folder
+          # Upload ONLY the contents of frontend/dist
           path: frontend/dist
 
   deploy:
     name: Deploy to GitHub Pages
     needs: build
     runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
