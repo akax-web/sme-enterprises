@@ -1,0 +1,14 @@
+# Netlify build configuration for Subramani Enterprises
+# The React/Vite frontend lives inside the frontend/ sub-directory.
+# Only the compiled output (frontend/dist) is published to Netlify.
+
+[build]
+  base    = "frontend"
+  command = "npm run build"
+  publish = "dist"
+
+# SPA redirect: send all routes to index.html so React Router works correctly.
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200

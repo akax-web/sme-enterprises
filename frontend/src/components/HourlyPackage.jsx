@@ -4,58 +4,45 @@ import { getTelLink } from '../config/businessConfig';
 import './HourlyPackage.css';
 
 /**
- * Static fallback data — EXACT values from the client-provided reference image.
- * Displayed whenever the backend is unreachable or the API is slow to respond.
- * The meaning of each "+" amount has NOT been confirmed by the client, so we
- * show the raw format without inventing label names.
+ * Static fallback data — exact values confirmed by the client.
+ * Displayed whenever the backend is unreachable or returns empty data.
+ * Never expose API/HTTP errors to customers.
+ *
+ * Structure:
+ *   id       — unique key for React
+ *   category — bold upper-case label (shown as card heading)
+ *   sub      — secondary line under the category (e.g. duration / qualifier)
+ *   price    — the price string
  */
 const STATIC_PACKAGES = [
   {
-    id: 'night-1',
-    category: 'NIGHT SERVICE',
-    timing: '10:00 PM – 6:00 AM',
-    duration: '4 Hours',
-    price: '₹500 + ₹100',
+    id: 'night-4h',
+    category: '4 HOURS',
+    sub: null,
+    price: '₹600 + ₹100',
   },
   {
-    id: 'night-2',
-    category: 'NIGHT SERVICE',
-    timing: '10:00 PM – 6:00 AM',
-    duration: '4 Hours',
-    price: '₹700 + ₹150',
-  },
-  {
-    id: 'night-3',
-    category: 'NIGHT SERVICE',
-    timing: '10:00 PM – 6:00 AM',
-    duration: '4 Hours',
-    price: '₹800 + ₹100',
-  },
-  {
-    id: 'night-add',
+    id: 'additional',
     category: 'ADDITIONAL HOURS',
-    timing: null,
-    duration: 'Per Hour',
+    sub: 'Per Hour',
     price: '₹100 + ₹150',
   },
   {
     id: 'local-out',
     category: 'LOCAL OUTSTATION',
-    timing: null,
-    duration: '4 Hours',
+    sub: '4 Hours',
     price: '₹700 + ₹100 + Food',
   },
   {
     id: 'outstation',
     category: 'OUTSTATION TRIP',
-    timing: null,
-    duration: 'One Way',
+    sub: 'Per Day / One Way',
     price: '₹1,800 + Food',
   },
 ];
 
 function HourlyPackage() {
-  const [packages, setPackages] = useState(STATIC_PACKAGES);
+  const [packages, setPackages] = useState(null); // null = use static fallback
   const [fromBackend, setFromBackend] = useState(false);
 
   useEffect(() => {
@@ -65,13 +52,14 @@ function HourlyPackage() {
           setPackages(data);
           setFromBackend(true);
         }
-        // If backend returns empty array, keep static data silently
+        // Backend returned empty — keep static data silently
       })
       .catch(() => {
-        // Backend unavailable — static data already shown, nothing to do.
-        // Never expose errors to the customer.
+        // Backend unavailable — static data is already shown. Never expose errors.
       });
   }, []);
+
+  const displayPackages = fromBackend ? packages : STATIC_PACKAGES;
 
   return (
     <section id="hourly-package" className="section hourly-package">
@@ -79,16 +67,19 @@ function HourlyPackage() {
         <span className="section-label">Flexible &amp; Transparent</span>
         <h2 className="section-title">Hourly Package</h2>
 
-        <div className="hourly-package__header-row">
-          <div className="hourly-package__night-badge">
-            <NightIcon />
-            <span>Night Service: 10:00 PM – 6:00 AM</span>
+        {/* Single NIGHT SERVICE header — shown once above all cards */}
+        <div className="hourly-package__night-header">
+          <NightIcon />
+          <div className="hourly-package__night-text">
+            <span className="hourly-package__night-label">NIGHT SERVICE</span>
+            <span className="hourly-package__night-timing">10:00 PM – 6:00 AM</span>
           </div>
         </div>
 
+        {/* Package cards — no NIGHT SERVICE repeated inside each card */}
         <div className="hourly-package__grid">
           {fromBackend
-            ? /* Backend data — use existing row rendering */
+            ? /* Backend data */
               packages.map((pkg) => (
                 <div key={pkg.id} className="hourly-package__card card">
                   <div className="hourly-package__card-category">{pkg.name}</div>
@@ -98,21 +89,22 @@ function HourlyPackage() {
                   )}
                 </div>
               ))
-            : /* Static fallback — polished cards */
+            : /* Static fallback */
               STATIC_PACKAGES.map((pkg) => (
                 <div key={pkg.id} className="hourly-package__card card">
                   <div className="hourly-package__card-category">{pkg.category}</div>
-                  {pkg.timing && (
-                    <div className="hourly-package__card-timing">{pkg.timing}</div>
+                  {pkg.sub && (
+                    <div className="hourly-package__card-sub">{pkg.sub}</div>
                   )}
-                  <div className="hourly-package__card-duration">{pkg.duration}</div>
                   <div className="hourly-package__card-price">{pkg.price}</div>
                 </div>
               ))}
         </div>
 
+        {/* Single informational note below all cards */}
         <p className="hourly-package__note">
-          Please contact the proprietor to confirm the applicable package and current charges.
+          Additional hours will be charged at ₹100 + ₹150 per hour. Please contact the proprietor
+          to confirm the applicable package and current charges.
         </p>
 
         <a href={getTelLink()} className="btn btn-primary">
@@ -125,7 +117,7 @@ function HourlyPackage() {
 
 function NightIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path
         d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
         fill="currentColor"

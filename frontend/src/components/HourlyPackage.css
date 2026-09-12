@@ -2,34 +2,48 @@
   background: var(--color-bg-alt);
 }
 
-.hourly-package__header-row {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 32px;
-}
+/* ---- Night Service Header (shown ONCE, above all cards) ---- */
 
-.hourly-package__night-badge {
+.hourly-package__night-header {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   background: rgba(245, 181, 68, 0.1);
   border: 1px solid rgba(245, 181, 68, 0.3);
-  padding: 10px 18px;
+  padding: 12px 20px;
   border-radius: 999px;
-  font-weight: 600;
-  font-size: 14px;
+  margin-bottom: 28px;
   color: var(--color-accent);
+}
+
+.hourly-package__night-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hourly-package__night-label {
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.hourly-package__night-timing {
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.85;
+  line-height: 1.2;
 }
 
 /* ---- Package Grid ---- */
 
 .hourly-package__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 16px;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
 .hourly-package__card {
@@ -40,6 +54,7 @@
   border-radius: var(--radius-md);
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   cursor: default;
+  min-width: 0; /* prevent grid blowout */
 }
 
 .hourly-package__card:hover {
@@ -56,25 +71,21 @@
   color: var(--color-accent);
 }
 
-.hourly-package__card-timing {
+.hourly-package__card-sub {
   font-size: 12px;
   color: var(--color-text-dim);
-}
-
-.hourly-package__card-duration {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--color-text);
-  border-top: 1px solid var(--color-border);
-  padding-top: 10px;
-  margin-top: 4px;
+  font-weight: 500;
 }
 
 .hourly-package__card-price {
-  font-size: 22px;
+  font-size: 21px;
   font-weight: 800;
   color: var(--color-accent);
-  line-height: 1.1;
+  line-height: 1.2;
+  word-break: break-word;
+  border-top: 1px solid var(--color-border);
+  padding-top: 10px;
+  margin-top: 4px;
 }
 
 .hourly-package__card-label {
@@ -83,25 +94,57 @@
   font-style: italic;
 }
 
+/* ---- Note ---- */
+
 .hourly-package__note {
   color: var(--color-text-muted);
   font-size: 14px;
   margin-bottom: 24px;
-  max-width: 560px;
+  max-width: 580px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--color-border);
   border-left: 3px solid var(--color-accent);
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   padding: 12px 16px;
+  line-height: 1.55;
 }
 
-/* ---- Responsive ---- */
+/* ---- Responsive: 768px ---- */
+@media (max-width: 768px) {
+  .hourly-package__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+}
+
+/* ---- Responsive: 480px and below (360–414px phones) ---- */
 @media (max-width: 480px) {
   .hourly-package__grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .hourly-package__night-header {
+    padding: 10px 16px;
+  }
+
+  .hourly-package__night-label {
+    font-size: 12px;
+  }
+
+  .hourly-package__night-timing {
+    font-size: 11px;
+  }
+
+  .hourly-package__card {
+    padding: 18px 18px;
   }
 
   .hourly-package__card-price {
-    font-size: 20px;
+    font-size: 19px;
+  }
+
+  .hourly-package__note {
+    font-size: 13px;
   }
 }

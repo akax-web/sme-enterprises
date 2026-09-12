@@ -3,13 +3,13 @@ import react from '@vitejs/plugin-react';
 
 // Vite configuration for the Subramani Enterprises frontend.
 //
-// base is set to the GitHub Pages sub-path in production.
-// During local development (npm run dev) the base defaults to '/',
+// base is '/' for Netlify deployment (site deployed at root of domain).
+// For local development (npm run dev) this also resolves correctly at /
 // so localhost:5173 continues to work without any changes.
-export default defineConfig(({ command }) => ({
+export default defineConfig({
   plugins: [react()],
-  base: command === 'build' ? '/sme-enterprises/' : '/',
+  base: '/',
   server: {
     port: 5173,
   },
-}));
+});
