@@ -43,11 +43,10 @@ const businessConfig = {
   // It is used to generate the QR code.
   // Do NOT use localhost / 127.0.0.1 / a local IP address here.
   // Can be overridden by the VITE_PUBLIC_WEBSITE_URL environment variable.
-  // Set VITE_PUBLIC_WEBSITE_URL in your Netlify environment variables
-  // to the final deployed URL (e.g. https://subramani-enterprises.netlify.app/).
-  // Do NOT hard-code a placeholder URL here — leave it to the env variable.
+  // Set VITE_PUBLIC_WEBSITE_URL in your deployment environment variables
+  // to override this value. Defaults to the live GitHub Pages URL.
   PUBLIC_WEBSITE_URL:
-    import.meta.env.VITE_PUBLIC_WEBSITE_URL || '',
+    import.meta.env.VITE_PUBLIC_WEBSITE_URL || 'https://akax-web.github.io/sme-enterprises/',
 
   // ---------------- Backend API ----------------
   // Base URL of the deployed Spring Boot backend.

@@ -3,13 +3,22 @@ import react from '@vitejs/plugin-react';
 
 // Vite configuration for the Subramani Enterprises frontend.
 //
-// base is '/' for Netlify deployment (site deployed at root of domain).
-// For local development (npm run dev) this also resolves correctly at /
-// so localhost:5173 continues to work without any changes.
-export default defineConfig({
+// DEPLOYMENT TARGETS:
+//   GitHub Pages: https://akax-web.github.io/sme-enterprises/
+//     → base must be '/sme-enterprises/' so assets resolve under that sub-path
+//
+//   Local development (npm run dev):
+//     → base defaults to '/' so localhost:5173 works without changes
+//
+// The VITE_BASE_PATH environment variable lets CI override the base.
+// The GitHub Actions workflow does NOT set VITE_BASE_PATH, so it defaults
+// to '/sme-enterprises/' in build mode.
+export default defineConfig(({ command }) => ({
   plugins: [react()],
-  base: '/',
+  // Use '/sme-enterprises/' for production builds (GitHub Pages sub-path).
+  // Use '/' for local development.
+  base: command === 'build' ? '/sme-enterprises/' : '/',
   server: {
     port: 5173,
   },
-});
+}));
